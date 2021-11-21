@@ -1,0 +1,54 @@
+https://dockerlabs.collabnix.com/docker/cheatsheet/
+
+//A Docker image contains application code, libraries, tools, dependencies and other files
+ needed to make an application run. When a user runs an image,
+  it can become one or many instances of a container.
+
+docker pull jenkins  [to pull image]
+
+// get image id
+docker images        [to get list of images]
+docker images ls
+
+// run image
+docker run jenkins   [to run images and you have to open new console as this one will start application]
+docker run -d jenkins [ no need to open new terminal tab ]
+
+// how to map port
+docker  [ 8080 is ours and 80 is container port]
+docker run -p 8080:80 -p 3000:80 jenkins [ can map multiple port]
+
+// get container id
+docker container ls  [ to get list of all containers]
+docker ps            [ same thing]
+
+// how to stop container
+docker stop {container_id} [ get container id via docker ps ir docker container ls]
+
+// see all running and stopped container
+docker ps -a [all info]
+docker ps -aq [ only id]
+
+
+// remove container
+docker rm container
+docker rm $(docker ps -aq) [delete all]
+docker rm -f $(docker ps -aq) [delete all including running]
+
+// how to name container
+docekr run --name manishJenkins jenkins/jenkins
+
+//mount volume nginx [host to docker container]
+docker run --name website -v ~/Desktop/Content:/usr/share/nginx/html:ro -d -p 8080:80 nginx
+// mount volume from other containe
+docker run --name wesite2 --volume-from website -d -p 8081:80 nginx
+
+// run docker Interactively
+
+docker exec -it {nameofcontaine} {shellname}
+docker exec -it website bash
+
+
+
+
+
